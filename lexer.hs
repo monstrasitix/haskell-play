@@ -35,8 +35,6 @@ parsing (tokens, acc, value) character =
             
         InValid parse ->
             (tokens, acc ++ parse, parse)
-    where
-        test = value ++ [character]
     
     
     
