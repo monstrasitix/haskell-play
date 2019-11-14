@@ -60,6 +60,9 @@ main = getContents >>= printer . lexing
     <name>John</name>
 </person>
 
+[<][person] [id][=]["][1]["] [gender][=]["][male]["][>]
+    [<][name][>][John][<][/][name][>]
+[<][/][person][>]
 
 <        open-tag
 person   token
@@ -79,9 +82,4 @@ male     token
 \n       newline
 \t       tab
 /        backslash
-
-
-[<][person] [id][=]["][1]["] [gender][=]["][male]["][>]
-    [<][name][>][John][<][/][name][>]
-[<][/][person][>]
 -}
