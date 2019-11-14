@@ -56,30 +56,44 @@ main = getContents >>= printer . lexing
     
 {-
 
-<person id="1" gender="male">
-    <name>John</name>
-</person>
+<bookstore>
+    <book ISBN="10-000000-001">
+        <title>The Iliad and The Odyssey</title>
+        <price>12.95</price>
+        <comments>
+            <userComment rating="4"> Best translation I've read. </userComment>
+            <userComment rating="2"> I like other versions better. </userComment>
+        </comments>
+    </book>
+    <book ISBN="10-000000-999">
+        <title>Anthology of World Literature</title>
+        <price>24.95</price>
+        <comments>
+            <userComment rating="3"> Needs more modern literature. </userComment>
+            <userComment rating="4"> Excellent overview of world literature. </userComment>
+        </comments>
+    </book>
+</bookstore>
 
-[<][person] [id][=]["][1]["] [gender][=]["][male]["][>]
-    [<][name][>][John][<][/][name][>]
-[<][/][person][>]
 
-<        open-tag
-person   token
-         space
-id       token
-=        attribute-assignment
-"        quote-double
-1        token
-"        quote-double
-         space
-gender   token
-=        attribute-assignment
-"        quote-double
-male     token
-"        quote-double
->        close-tag
-\n       newline
-\t       tab
-/        backslash
+[<][bookstore][>]
+    [<][book] [ISBN][=]["][10-000000-001]["][>]
+        [<][title][>][The] [Iliad] [and] [The] [Odyssey][<][/][title][>]
+        [<][price][>][12.95][<][/][price][>]
+        [<][comments][>]
+            [<][userComment] [rating][=]["][4]["][>] [Best] [translation] [I]['][ve] [read.] [<][/][userComment][>]
+            [<][userComment] [rating][=]["][2]["][>] [I] [like] [other] [versions] [better.] [<][/][userComment][>]
+        [<][/][comments][>]
+    [<][/][book][>]
+    [<][book] [ISBN][=]["][10-000000-999]["][>]
+        [<][title][>][Anthology] [of] [World] [Literature][<][/][title][>]
+        [<][price][>][24.95][<][/][price][>]
+        [<][comments][>]
+            [<][userComment] [rating][=]["][3]["][>] [Needs] [more] [modern] [literature.] [<][/][userComment][>]
+            [<][userComment] [rating][=]["][4]["][>] [Excellent] [overview] [of] [world] [literature.] [<][/][userComment][>]
+        [<][/][comments][>]
+    [<][/][book][>]
+[<][/][bookstore][>]
+
+
 -}
