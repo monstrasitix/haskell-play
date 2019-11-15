@@ -95,3 +95,54 @@ main = getContents >>= printer . lexing
 
 
 -}
+
+
+
+{- JavaScript
+
+
+const getTemplate = id => (
+	document.getElementById(id).textContent.trim()
+);
+
+
+const wrap = character => ({
+	type: character,
+});
+
+
+const characterMatch = character => ({
+	'(': wrap('bracket.open'), ')': wrap('bracket.close'),
+	'<': wrap('bracket.open.angle'), '>': wrap('bracket.close.angle'),
+	'{': wrap('bracket.open.curly'), '}': wrap('bracket.close.curly'),
+	
+	'/': wrap('/'),
+	' ': wrap('space'),
+	'\n': wrap('newline'),
+	'\t': wrap('tab'),
+	'=': wrap('equals'),
+	
+	'"': wrap('quote.double'), '\'': wrap('quote.single'),
+}[character]);
+
+
+
+const reducer = ([accumalated, leftover], character) => (
+	characterMatch(character)
+		? leftover
+				? ([ [...accumalated, { type: 'token', value: leftover }, characterMatch(character)], '' ])
+				: ([ [...accumalated, characterMatch(character)], '' ])
+		: ([ accumalated, leftover + character ])
+);
+	
+
+const [result] = Array
+	.from(getTemplate('code'))
+	.reduce(reducer, [[], '']);
+
+
+console.log(result.filter(a => (
+	!['tab', 'space', 'newline'].includes(a.type)
+)));
+
+-}
