@@ -11,10 +11,10 @@ main =
 
 <meta>
     <media>
-        <query name="mobile"  trigger=[only screen max-width="400px"] />
-        <query name="tablet"  trigger=[only screen max-width="600px"] />
-        <query name="desktop" trigger=[only screen max-width="800px"] />
-        <query name="wide"    trigger=[only screen max-width="1000px"] />
+        <media:query name="mobile"  trigger=[only screen max-width="400px"] />
+        <media:query name="tablet"  trigger=[only screen max-width="600px"] />
+        <media:query name="desktop" trigger=[only screen max-width="800px"] />
+        <media:query name="wide"    trigger=[only screen max-width="1000px"] />
     </media>
 </meta>
 
