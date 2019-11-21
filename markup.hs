@@ -8,15 +8,42 @@ main =
     
 {-
 
+<style>
+    paragraph {
+        font: {
+            family: 'sans-serif';
+            color: red;
+            size: 10px;
+        }
+        
+        line-height: 1.4;
+    }
+    
+    group {
+        &[for="button"] {
+            background: {
+                color: orange;
+                repeat: repeat;
+                size: cover;
+                image: url('./images/background-palette.svg');
+            }
+        }
+    }
+    
+    
+    icon {
+        &:previous:not(:empty) { margin-left: 1em }
+        &:next:not(:empty) { margin-right: 1em }
+    }
+</style>
 
-<meta>
-    <media>
-        <media:query name="mobile"  trigger=[only screen max-width="400px"] />
-        <media:query name="tablet"  trigger=[only screen max-width="600px"] />
-        <media:query name="desktop" trigger=[only screen max-width="800px"] />
-        <media:query name="wide"    trigger=[only screen max-width="1000px"] />
-    </media>
-</meta>
+<media>
+    <media:query name="mobile"  trigger=[only screen max-width="400px"] />
+    <media:query name="tablet"  trigger=[only screen max-width="600px"] />
+    <media:query name="desktop" trigger=[only screen max-width="800px"] />
+    <media:query name="wide"    trigger=[only screen max-width="1000px"] />
+</media>
+
 
 
 <view name="landing-page" size=[width="100" height="200"]>
