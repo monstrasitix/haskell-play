@@ -9,8 +9,8 @@ data Todo = Todo
     , todoComplete :: Bool
     }
     
-    | Incomplete Int String
-    | Complete Int String
+    | Incomplete String
+    | Complete String
     
 todoMark :: Todo -> String
 todoMark = f . todoComplete
@@ -19,8 +19,8 @@ todoMark = f . todoComplete
         f False = "[ ]"
     
 instance New Todo where
-    new (Incomplete id' desc)   = Todo id' desc False
-    new (Complete id' desc)     = Todo id' desc True
+    new (Incomplete desc)   = Todo 0 desc False
+    new (Complete desc)     = Todo 0 desc True
 
 instance Show Todo where
     show todo = printf "%s %d - %s"
@@ -28,15 +28,27 @@ instance Show Todo where
         (todoId todo)
         (todoDescription todo)
 
+withUnique :: (a -> Int -> a) -> [a] -> [a]
+withUnique f ll = fst $ foldr ff ([], length ll) ll
+    where
+        ff x (acc, n) = ((f x (n - 1) : acc), n - 1)
+
 todos :: [Todo]
-todos = [ new (Incomplete 1 "Learn Haskell")
-        , new (Complete 2 "Get a dog")
-        , new (Incomplete 3 "Walk the dog")
-        , new (Complete 4 "Prepare for brunch")
-        , new (Incomplete 5 "Drink water") 
+todos = [ new (Incomplete "Learn Haskell")
+        , new (Complete "Get a dog")
+        , new (Incomplete "Walk the dog")
+        , new (Complete "Prepare for brunch")
+        , new (Incomplete "Drink water") 
         ]
+
+otherTodos :: [Todo]        
+otherTodos = withUnique ff todos
+    where
+        ff x n = x { todoId = n + 1 }
 
 main :: IO ()
 main = do
     mapM_ print todos
+    print "------------------"
+    mapM_ print otherTodos
 
