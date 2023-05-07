@@ -1,5 +1,6 @@
 import Data.IORef
 import Data.List
+import Data.Maybe
 import Text.Printf
 
 {- stdin
@@ -114,17 +115,12 @@ actionPreform ref action = case action of
     ShowTodos           -> readIORef ref >>= printList . snd
     Exit                -> return ()
 
-actionClean :: Maybe Action -> Action
-actionClean x = case x of
-    Just a  -> a
-    Nothing -> Exit
-
 main :: IO ()
 main = do
     ref <- newIORef ((0, []) :: AppState)
     
     getContents
         >>= return . map words . lines
-        >>= mapM_ (actionPreform ref . actionClean . action)
+        >>= mapM_ (actionPreform ref . fromMaybe Exit . action)
 
     readIORef ref >>= printList . snd
